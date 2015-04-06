@@ -1,5 +1,5 @@
 {
-  "name": "DigitalProducts/codeception-visualception",
+  "name": "digital-products/codeception-visualception",
   "description": "A module for Codeception to test visual changes on web pages",  
   "homepage": "https://github.com/DigitalProducts/codeception-module-visualception",
   "license": "Apache-2.0",
