@@ -52,7 +52,7 @@ class VisualCeption extends \Codeception\Module
      */
     public function _before(\Codeception\TestCase $test)
     {
-        if (!$this->hasModule("WebDriver") || $this->hasModule("Selenium2")) {
+        if (!$this->hasModule("WebDriver") && !$this->hasModule("Selenium2")) {
             throw new \Exception("VisualCeption uses the WebDriver. Please be sure that this module is activated.");
         }
 
