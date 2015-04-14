@@ -65,7 +65,7 @@ class VisualCeption extends \Codeception\Module
         // Or use selenium 2 driver
         if($this->hasModule("Selenium2")) {
             $this->webDriverModule = $this->getModule("Selenium2");
-            $this->webDriver       = $this->getModule("Selenium2")->webDriverSession;
+            $this->webDriver       = $this->getModule("Selenium2");
         }
 
         $this->webDriverWrapper = new DriverWrapper($this->webDriver);
@@ -151,7 +151,7 @@ class VisualCeption extends \Codeception\Module
      */
     private function hideElement($elementSelector)
     {
-        $this->webDriverWrapper->executeScript('
+        $this->webDriver->executeScript('
             if( jQuery("' . $elementSelector . '").length > 0 ) {
                 jQuery( "' . $elementSelector . '" ).css("visibility","hidden");
             }
@@ -166,7 +166,7 @@ class VisualCeption extends \Codeception\Module
      */
     private function showElement($elementSelector)
     {
-        $this->webDriverWrapper->executeScript('
+        $this->webDriver->executeScript('
             if( jQuery("' . $elementSelector . '").length > 0 ) {
                 jQuery( "' . $elementSelector . '" ).css("visibility","visible");
             }
@@ -250,21 +250,21 @@ class VisualCeption extends \Codeception\Module
         }
 
         $jQueryString = file_get_contents(__DIR__ . "/jquery.js");
-        $this->webDriverWrapper->executeScript($jQueryString);
-        $this->webDriverWrapper->executeScript('jQuery.noConflict();');
+        $this->webDriver->executeScript($jQueryString);
+        $this->webDriver->executeScript('jQuery.noConflict();');
 
         $imageCoords = array();
 
-        $elementExists = (bool)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).length > 0;');
+        $elementExists = (bool)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).length > 0;');
 
         if (!$elementExists) {
             throw new \Exception("The element you want to examine ('" . $elementId . "') was not found.");
         }
 
-        $imageCoords['offset_x'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).offset().left;');
-        $imageCoords['offset_y'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).offset().top;');
-        $imageCoords['width'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).width();');
-        $imageCoords['height'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).height();');
+        $imageCoords['offset_x'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).offset().left;');
+        $imageCoords['offset_y'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).offset().top;');
+        $imageCoords['width'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).width();');
+        $imageCoords['height'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).height();');
 
         return $imageCoords;
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Codeception\Module;
+
 use Codeception\Module\ImageDeviationException;
 
 /**
@@ -8,6 +9,7 @@ use Codeception\Module\ImageDeviationException;
 */
 class DriverWrapper
 {
+    /** @var Selenium2 $driver  */
     private $driver = null;
 
     private $use_selenium = false;
@@ -19,12 +21,12 @@ class DriverWrapper
 
     public function executeScript($js)
     {
-        if($this->driver instanceof WebDriver) {
+        if(get_class($this->driver) == "WebDriver") {
             return $this->driver->executeScript($js);
         }
 
-        if($this->driver instanceof WebDriver\Session) {
-            return $this->driver->execute($js);
+        if(get_class($this->driver) == "WebDriver\\Session") {
+            return $this->driver->executeJs($js);
         }
 
         throw new \Exception("VisualCeption uses the WebDriver or Selenium2. Please be sure that this module is activated.");
