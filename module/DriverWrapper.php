@@ -21,11 +21,11 @@ class DriverWrapper
 
     public function executeScript($js)
     {
-        if(get_class($this->driver) == "WebDriver") {
+        if(strpos(get_class($this->driver),"WebDriver") !== false ) {
             return $this->driver->executeScript($js);
         }
 
-        if(get_class($this->driver) == "WebDriver\\Session") {
+        if(strpos(get_class($this->driver),"Selenium2") !== false) {
             return $this->driver->executeJs($js);
         }
 
