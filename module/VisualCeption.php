@@ -65,7 +65,7 @@ class VisualCeption extends \Codeception\Module
         // Or use selenium 2 driver
         if($this->hasModule("Selenium2")) {
             $this->webDriverModule = $this->getModule("Selenium2");
-            $this->webDriver       = $this->findModule("Selenium2")->getDriver();
+            $this->webDriver       = $this->getModule("Selenium2")->webDriverSession;
         }
 
         $this->webDriverWrapper = new DriverWrapper($this->webDriver);
