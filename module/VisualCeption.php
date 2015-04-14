@@ -250,8 +250,8 @@ class VisualCeption extends \Codeception\Module
         }
 
         $jQueryString = file_get_contents(__DIR__ . "/jquery.js");
-        $this->webDriver->executeScript($jQueryString);
-        $this->webDriver->executeScript('jQuery.noConflict();');
+        $this->webDriverWrapper->executeScript($jQueryString);
+        $this->webDriverWrapper->executeScript('jQuery.noConflict();');
 
         $imageCoords = array();
 
@@ -261,10 +261,10 @@ class VisualCeption extends \Codeception\Module
             throw new \Exception("The element you want to examine ('" . $elementId . "') was not found.");
         }
 
-        $imageCoords['offset_x'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).offset().left;');
-        $imageCoords['offset_y'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).offset().top;');
-        $imageCoords['width'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).width();');
-        $imageCoords['height'] = (string)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).height();');
+        $imageCoords['offset_x'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).offset().left;');
+        $imageCoords['offset_y'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).offset().top;');
+        $imageCoords['width'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).width();');
+        $imageCoords['height'] = (string)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).height();');
 
         return $imageCoords;
     }
