@@ -29,6 +29,7 @@ class VisualCeption extends \Codeception\Module
 
     private $webDriver = null;
     private $webDriverModule = null;
+    private $webDriverWrapper = null;
 
     /**
      * Create an object from VisualCeption Class
@@ -67,9 +68,11 @@ class VisualCeption extends \Codeception\Module
             $this->webDriver       = $this->findModule("Selenium2")->getDriver();
         }
 
+        $this->webDriverWrapper = new DriverWrapper($this->webDriver);
+
         $jQueryString = file_get_contents(__DIR__ . "/jquery.js");
-        $this->webDriver->executeScript($jQueryString);
-        $this->webDriver->executeScript('jQuery.noConflict();');
+        $this->webDriverWrapper->executeScript($jQueryString);
+        $this->webDriverWrapper->executeScript('jQuery.noConflict();');
 
         $this->test = $test;
     }
