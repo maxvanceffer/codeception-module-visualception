@@ -67,10 +67,6 @@ class VisualCeption extends \Codeception\Module
             $this->webDriver       = $this->findModule("Selenium2")->getDriver();
         }
 
-        if(is_null($this->webDriverModule)) {
-            $this->webDriverModule = $this
-        }
-
         $jQueryString = file_get_contents(__DIR__ . "/jquery.js");
         $this->webDriver->executeScript($jQueryString);
         $this->webDriver->executeScript('jQuery.noConflict();');
