@@ -151,7 +151,7 @@ class VisualCeption extends \Codeception\Module
      */
     private function hideElement($elementSelector)
     {
-        $this->webDriver->executeScript('
+        $this->webDriverWrapper->executeScript('
             if( jQuery("' . $elementSelector . '").length > 0 ) {
                 jQuery( "' . $elementSelector . '" ).css("visibility","hidden");
             }
@@ -166,7 +166,7 @@ class VisualCeption extends \Codeception\Module
      */
     private function showElement($elementSelector)
     {
-        $this->webDriver->executeScript('
+        $this->webDriverWrapper->executeScript('
             if( jQuery("' . $elementSelector . '").length > 0 ) {
                 jQuery( "' . $elementSelector . '" ).css("visibility","visible");
             }
@@ -255,7 +255,7 @@ class VisualCeption extends \Codeception\Module
 
         $imageCoords = array();
 
-        $elementExists = (bool)$this->webDriver->executeScript('return jQuery( "' . $elementId . '" ).length > 0;');
+        $elementExists = (bool)$this->webDriverWrapper->executeScript('return jQuery( "' . $elementId . '" ).length > 0;');
 
         if (!$elementExists) {
             throw new \Exception("The element you want to examine ('" . $elementId . "') was not found.");
@@ -339,7 +339,7 @@ class VisualCeption extends \Codeception\Module
         $elementPath = $this->getScreenshotPath($identifier);
 
         $this->hideElementsForScreenshot($excludeElements);
-        $this->webDriver->takeScreenshot($screenshotPath);
+        $this->webDriverWrapper->takeScreenshot($screenshotPath);
         $this->resetHideElementsForScreenshot($excludeElements);
 
         $screenShotImage = new \Imagick();
