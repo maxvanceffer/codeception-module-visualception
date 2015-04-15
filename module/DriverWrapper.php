@@ -7,6 +7,8 @@ use Doctrine\Common\Util\Debug;
 
 /**
 * Wrapper to execute command
+* @author Maxim Gnidak <maxvanceffer@gmail.com>
+* @note command wrapper between Selenium2 and WebDriver
 */
 class DriverWrapper
 {
